@@ -1,7 +1,8 @@
 name: browser_webview
-description: "An enhanced in-app browser package for Flutter."
+description: "A comprehensive Flutter package providing multiple types of in-app webview experiences."
 version: 0.0.1
-homepage:
+homepage: https://github.com/KANAGARAJ-M/browser_webview
+repository: https://github.com/KANAGARAJ-M/browser_webview
 
 environment:
   sdk: ^3.11.4
