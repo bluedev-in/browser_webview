@@ -3,7 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+/// A utility class to show a WebView in a modal bottom sheet.
 class ModalBrowser {
+  /// Shows a modal bottom sheet containing a WebView.
   static void show(BuildContext context, String url, {String? title}) {
     showModalBottomSheet(
       context: context,

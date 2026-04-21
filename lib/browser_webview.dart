@@ -1,4 +1,4 @@
-library browser_webview;
+library;
 
 export 'src/enhanced_browser.dart';
 export 'src/simple_browser.dart';

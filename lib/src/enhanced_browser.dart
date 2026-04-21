@@ -8,7 +8,9 @@ import 'package:share_plus/share_plus.dart';
 class EnhancedInAppBrowser {
   static final EnhancedInAppBrowser _instance =
       EnhancedInAppBrowser._internal();
+  /// Provides access to the singleton instance of [EnhancedInAppBrowser].
   factory EnhancedInAppBrowser() => _instance;
+  /// Private constructor for singleton
   EnhancedInAppBrowser._internal();
 
   /// Opens URL in enhanced browser
@@ -110,12 +112,28 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
   // Animation controllers
   late AnimationController _toolbarAnimationController;
 
+  late FindInteractionController _findInteractionController;
+
   @override
   void initState() {
     super.initState();
     _currentUrl = widget.url;
     _pageTitle = widget.title ?? 'Loading...';
     _addressController.text = widget.url;
+
+    _findInteractionController = FindInteractionController(
+      onFindResultReceived: (
+        controller,
+        activeMatchOrdinal,
+        numberOfMatches,
+        isDoneCounting,
+      ) {
+        setState(() {
+          _findCurrentMatch = activeMatchOrdinal + 1;
+          _findTotalMatches = numberOfMatches;
+        });
+      },
+    );
 
     // Initialize animation controllers
     _toolbarAnimationController = AnimationController(
@@ -275,18 +293,7 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
 
                   return NavigationActionPolicy.ALLOW;
                 },
-                onFindResultReceived:
-                    (
-                      controller,
-                      activeMatchOrdinal,
-                      numberOfMatches,
-                      isDoneCounting,
-                    ) {
-                      setState(() {
-                        _findCurrentMatch = activeMatchOrdinal + 1;
-                        _findTotalMatches = numberOfMatches;
-                      });
-                    },
+                findInteractionController: _findInteractionController,
                 onScrollChanged: (controller, x, y) {
                   // Can be used for auto-hiding toolbar
                 },
@@ -312,7 +319,7 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
         color: isDark ? Colors.grey[900] : Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -642,9 +649,9 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
               ),
               onChanged: (value) {
                 if (value.isNotEmpty) {
-                  _webViewController?.findAllAsync(find: value);
+                  _findInteractionController.findAll(find: value);
                 } else {
-                  _webViewController?.clearMatches();
+                  _findInteractionController.clearMatches();
                   setState(() {
                     _findCurrentMatch = 0;
                     _findTotalMatches = 0;
@@ -666,12 +673,12 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
             ),
           IconButton(
             icon: const Icon(Icons.keyboard_arrow_up, size: 20),
-            onPressed: () => _webViewController?.findNext(forward: false),
+            onPressed: () => _findInteractionController.findNext(forward: false),
             color: isDark ? Colors.white70 : Colors.black54,
           ),
           IconButton(
             icon: const Icon(Icons.keyboard_arrow_down, size: 20),
-            onPressed: () => _webViewController?.findNext(forward: true),
+            onPressed: () => _findInteractionController.findNext(forward: true),
             color: isDark ? Colors.white70 : Colors.black54,
           ),
           IconButton(
@@ -683,7 +690,7 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
                 _findCurrentMatch = 0;
                 _findTotalMatches = 0;
               });
-              _webViewController?.clearMatches();
+              _findInteractionController.clearMatches();
             },
             color: isDark ? Colors.white70 : Colors.black54,
           ),
@@ -708,7 +715,7 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
         color: isDark ? Colors.grey[900] : Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
             offset: const Offset(0, -2),
           ),
@@ -825,14 +832,16 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
           ),
         );
         _refresh();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              _isDesktopMode ? 'Desktop mode enabled' : 'Mobile mode enabled',
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                _isDesktopMode ? 'Desktop mode enabled' : 'Mobile mode enabled',
+              ),
+              duration: const Duration(seconds: 1),
             ),
-            duration: const Duration(seconds: 1),
-          ),
-        );
+          );
+        }
         break;
       case 'share':
         _shareUrl();
@@ -893,7 +902,9 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
   }
 
   void _shareUrl() async {
-    await Share.share(_currentUrl, subject: _pageTitle);
+    await SharePlus.instance.share(
+      ShareParams(text: _currentUrl, subject: _pageTitle),
+    );
   }
 
   void _copyUrl() {
@@ -982,8 +993,9 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
   String _formatFileSize(int bytes) {
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
-    if (bytes < 1024 * 1024 * 1024)
+    if (bytes < 1024 * 1024 * 1024) {
       return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+    }
     return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB';
   }
 
@@ -1114,13 +1126,12 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
                 leading: const Icon(Icons.delete_outline),
                 title: const Text('Clear browsing data'),
                 onTap: () async {
-                  await _webViewController?.clearCache();
-                  if (mounted) {
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Cache cleared')),
-                    );
-                  }
+                  await InAppWebViewController.clearAllCache();
+                  if (!context.mounted) return;
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Cache cleared')),
+                  );
                 },
               ),
               SizedBox(height: MediaQuery.of(context).padding.bottom),

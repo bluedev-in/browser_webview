@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+/// Represents a single tab in the [TabbedBrowser].
 class WebTab {
+  /// The unique ID of the tab.
   final String id;
+  /// The initial URL of the tab.
   final String initialUrl;
+  /// The current URL of the tab.
   String currentUrl;
+  /// The title of the tab.
   String title;
+  /// The controller for this tab's web view.
   InAppWebViewController? controller;
 
+  /// Creates a new [WebTab].
   WebTab({
     required this.id,
     required this.initialUrl,
@@ -16,11 +23,15 @@ class WebTab {
   });
 }
 
+/// A browser widget that supports multiple tabs.
 class TabbedBrowser extends StatefulWidget {
+  /// The initial URL to load when the browser opens.
   final String initialUrl;
 
+  /// Creates a new [TabbedBrowser] widget.
   const TabbedBrowser({super.key, this.initialUrl = 'https://google.com'});
 
+  /// Opens the [TabbedBrowser] in a new route.
   static Future<void> open(BuildContext context, {String initialUrl = 'https://google.com'}) async {
     await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => TabbedBrowser(initialUrl: initialUrl)),
@@ -178,7 +189,7 @@ class _TabbedBrowserState extends State<TabbedBrowser> {
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              color: isActive ? Colors.blue.withOpacity(0.1) : Colors.grey.shade100,
+                              color: isActive ? Colors.blue.withValues(alpha: 0.1) : Colors.grey.shade100,
                               child: Row(
                                 children: [
                                   Expanded(

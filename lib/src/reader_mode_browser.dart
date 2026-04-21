@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+/// A browser widget that provides a simplified reader mode view.
 class ReaderModeBrowser extends StatefulWidget {
+  /// The URL to load.
   final String url;
 
+  /// Creates a new [ReaderModeBrowser] widget.
   const ReaderModeBrowser({super.key, required this.url});
 
+  /// Opens the [ReaderModeBrowser] in a new route.
   static Future<void> open(BuildContext context, String url) async {
     await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => ReaderModeBrowser(url: url)),

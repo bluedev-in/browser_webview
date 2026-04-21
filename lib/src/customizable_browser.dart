@@ -3,24 +3,40 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 
+/// Configuration options for the CustomizableBrowser.
 class BrowserOptions {
+  /// Whether JavaScript is enabled.
   final bool javaScriptEnabled;
+  /// Whether zooming is supported.
   final bool supportZoom;
+  /// Whether to use the download start event.
   final bool useOnDownloadStart;
+  /// Whether media playback requires a user gesture.
   final bool mediaPlaybackRequiresUserGesture;
+  /// Whether inline media playback is allowed.
   final bool allowsInlineMediaPlayback;
+  /// Whether back and forward navigation gestures are allowed.
   final bool allowsBackForwardNavigationGestures;
+  /// The preferred content mode (mobile or desktop).
   final UserPreferredContentMode preferredContentMode;
   
   // UI Options
+  /// The color of the toolbar.
   final Color? toolbarColor;
+  /// The color of the icons.
   final Color? iconColor;
+  /// The color of the progress bar.
   final Color? progressBarColor;
+  /// Whether to show the address bar.
   final bool showAddressBar;
+  /// Whether to show the bottom toolbar.
   final bool showBottomToolbar;
+  /// Whether to show the close button.
   final bool showCloseButton;
+  /// A custom user agent string.
   final String? customUserAgent;
 
+  /// Creates a new [BrowserOptions] instance.
   const BrowserOptions({
     this.javaScriptEnabled = true,
     this.supportZoom = true,
@@ -39,11 +55,16 @@ class BrowserOptions {
   });
 }
 
+/// A customizable browser widget.
 class CustomizableBrowser extends StatefulWidget {
+  /// The URL to load.
   final String url;
+  /// The title of the browser (optional).
   final String? title;
+  /// The options for the browser.
   final BrowserOptions options;
 
+  /// Creates a new [CustomizableBrowser] widget.
   const CustomizableBrowser({
     super.key,
     required this.url,
@@ -51,6 +72,7 @@ class CustomizableBrowser extends StatefulWidget {
     this.options = const BrowserOptions(),
   });
 
+  /// Opens a customizable browser as a modal sheet or new route.
   static Future<void> open(
     BuildContext context,
     String url, {
@@ -124,7 +146,7 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.share),
-                  onPressed: () => Share.share(_currentUrl),
+                  onPressed: () => SharePlus.instance.share(ShareParams(text: _currentUrl)),
                 ),
               ],
             )

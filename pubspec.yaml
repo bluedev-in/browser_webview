@@ -1,6 +1,6 @@
 name: browser_webview
 description: "A comprehensive Flutter package providing multiple types of in-app webview experiences."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/KANAGARAJ-M/browser_webview
 repository: https://github.com/KANAGARAJ-M/browser_webview
 
@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   flutter_inappwebview: ^6.1.5
   url_launcher: ^6.3.1
-  share_plus: ^10.1.4
+  share_plus: ^13.0.0
 
 dev_dependencies:
   flutter_test:

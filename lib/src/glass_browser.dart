@@ -2,17 +2,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+/// A browser widget with a frosted glass aesthetic.
 class GlassBrowser extends StatefulWidget {
+  /// The URL to load.
   final String url;
+  /// The title of the browser (optional).
   final String? title;
 
+  /// Creates a new [GlassBrowser] widget.
   const GlassBrowser({super.key, required this.url, this.title});
 
+  /// Opens the [GlassBrowser] as a transparent route.
   static Future<void> open(BuildContext context, String url, {String? title}) async {
     Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
-        pageBuilder: (context, _, __) => GlassBrowser(url: url, title: title),
+        pageBuilder: (context, animation, secondaryAnimation) => GlassBrowser(url: url, title: title),
       ),
     );
   }
@@ -34,7 +39,7 @@ class _GlassBrowserState extends State<GlassBrowser> {
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withValues(alpha: 0.5),
             ),
           ),
           
@@ -51,9 +56,9 @@ class _GlassBrowserState extends State<GlassBrowser> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.white.withOpacity(0.3)),
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
                         ),
                         child: Row(
                           children: [
