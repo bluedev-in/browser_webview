@@ -6,6 +6,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 class GlassBrowser extends StatefulWidget {
   /// The URL to load.
   final String url;
+
   /// The title of the browser (optional).
   final String? title;
 
@@ -13,11 +14,16 @@ class GlassBrowser extends StatefulWidget {
   const GlassBrowser({super.key, required this.url, this.title});
 
   /// Opens the [GlassBrowser] as a transparent route.
-  static Future<void> open(BuildContext context, String url, {String? title}) async {
+  static Future<void> open(
+    BuildContext context,
+    String url, {
+    String? title,
+  }) async {
     Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
-        pageBuilder: (context, animation, secondaryAnimation) => GlassBrowser(url: url, title: title),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            GlassBrowser(url: url, title: title),
       ),
     );
   }
@@ -38,11 +44,9 @@ class _GlassBrowserState extends State<GlassBrowser> {
           // Frosted glass background
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              color: Colors.black.withValues(alpha: 0.5),
-            ),
+            child: Container(color: Colors.black.withValues(alpha: 0.5)),
           ),
-          
+
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -54,22 +58,33 @@ class _GlassBrowserState extends State<GlassBrowser> {
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.3),
+                          ),
                         ),
                         child: Row(
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.arrow_back, color: Colors.white),
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
                               onPressed: () => Navigator.pop(context),
                             ),
                             Expanded(
                               child: Text(
                                 widget.title ?? widget.url,
-                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -79,7 +94,7 @@ class _GlassBrowserState extends State<GlassBrowser> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Main Content
                   Expanded(
                     child: ClipRRect(
@@ -89,7 +104,9 @@ class _GlassBrowserState extends State<GlassBrowser> {
                         child: Stack(
                           children: [
                             InAppWebView(
-                              initialUrlRequest: URLRequest(url: WebUri(widget.url)),
+                              initialUrlRequest: URLRequest(
+                                url: WebUri(widget.url),
+                              ),
                               onProgressChanged: (controller, progress) {
                                 setState(() {
                                   _progress = progress / 100;
@@ -104,7 +121,10 @@ class _GlassBrowserState extends State<GlassBrowser> {
                                 child: LinearProgressIndicator(
                                   value: _progress,
                                   backgroundColor: Colors.transparent,
-                                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+                                  valueColor:
+                                      const AlwaysStoppedAnimation<Color>(
+                                        Colors.blue,
+                                      ),
                                 ),
                               ),
                           ],

@@ -58,9 +58,7 @@ class ModalBrowser {
                   Factory<ScaleGestureRecognizer>(
                     () => ScaleGestureRecognizer(),
                   ),
-                  Factory<TapGestureRecognizer>(
-                    () => TapGestureRecognizer(),
-                  ),
+                  Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
                   Factory<HorizontalDragGestureRecognizer>(
                     () => HorizontalDragGestureRecognizer(),
                   ),

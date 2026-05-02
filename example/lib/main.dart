@@ -41,7 +41,8 @@ class HomeScreen extends StatelessWidget {
             _buildBrowserCard(
               context,
               title: 'Enhanced Browser',
-              description: 'Full-featured browser with address bar, history, and desktop mode.',
+              description:
+                  'Full-featured browser with address bar, history, and desktop mode.',
               icon: Icons.browser_updated,
               color: Colors.blue,
               onTap: () => EnhancedInAppBrowser.open(
@@ -54,7 +55,8 @@ class HomeScreen extends StatelessWidget {
             _buildBrowserCard(
               context,
               title: 'Simple Browser',
-              description: 'Clean Material UI with standard AppBar and progress indicator.',
+              description:
+                  'Clean Material UI with standard AppBar and progress indicator.',
               icon: Icons.web,
               color: Colors.green,
               onTap: () => SimpleBrowser.open(
@@ -67,7 +69,8 @@ class HomeScreen extends StatelessWidget {
             _buildBrowserCard(
               context,
               title: 'Glass Browser',
-              description: 'Modern premium look with frosted glass effects and blur.',
+              description:
+                  'Modern premium look with frosted glass effects and blur.',
               icon: Icons.blur_on,
               color: Colors.purple,
               onTap: () => GlassBrowser.open(
@@ -80,7 +83,8 @@ class HomeScreen extends StatelessWidget {
             _buildBrowserCard(
               context,
               title: 'Customizable Browser',
-              description: 'Highly configurable with custom theme colors, toolbars, and settings.',
+              description:
+                  'Highly configurable with custom theme colors, toolbars, and settings.',
               icon: Icons.settings_applications,
               color: Colors.red,
               onTap: () => CustomizableBrowser.open(
@@ -98,7 +102,8 @@ class HomeScreen extends StatelessWidget {
             _buildBrowserCard(
               context,
               title: 'Tabbed Browser',
-              description: 'Multi-tab support with a tab switcher and new tab capabilities.',
+              description:
+                  'Multi-tab support with a tab switcher and new tab capabilities.',
               icon: Icons.dynamic_feed,
               color: Colors.teal,
               onTap: () => TabbedBrowser.open(context),
@@ -107,10 +112,12 @@ class HomeScreen extends StatelessWidget {
             _buildBrowserCard(
               context,
               title: 'Reader Mode Browser',
-              description: 'Focus on content by extracting text and removing distractions.',
+              description:
+                  'Focus on content by extracting text and removing distractions.',
               icon: Icons.chrome_reader_mode,
               color: Colors.brown,
-              onTap: () => ReaderModeBrowser.open(context, 'https://blog.flutter.dev'),
+              onTap: () =>
+                  ReaderModeBrowser.open(context, 'https://blog.flutter.dev'),
             ),
             const SizedBox(height: 24),
             _buildSectionHeader('Utilities & Widgets'),
@@ -138,17 +145,17 @@ class HomeScreen extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: const Column(
                 children: [
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Text(
                       'The box below is an InlineWebView widget embedded directly in this scroll view.',
-                      style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontStyle: FontStyle.italic,
+                      ),
                     ),
                   ),
-                  InlineWebView(
-                    url: 'https://flutter.dev',
-                    height: 300,
-                  ),
+                  InlineWebView(url: 'https://flutter.dev', height: 300),
                 ],
               ),
             ),

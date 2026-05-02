@@ -5,12 +5,16 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 class WebTab {
   /// The unique ID of the tab.
   final String id;
+
   /// The initial URL of the tab.
   final String initialUrl;
+
   /// The current URL of the tab.
   String currentUrl;
+
   /// The title of the tab.
   String title;
+
   /// The controller for this tab's web view.
   InAppWebViewController? controller;
 
@@ -32,9 +36,14 @@ class TabbedBrowser extends StatefulWidget {
   const TabbedBrowser({super.key, this.initialUrl = 'https://google.com'});
 
   /// Opens the [TabbedBrowser] in a new route.
-  static Future<void> open(BuildContext context, {String initialUrl = 'https://google.com'}) async {
+  static Future<void> open(
+    BuildContext context, {
+    String initialUrl = 'https://google.com',
+  }) async {
     await Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => TabbedBrowser(initialUrl: initialUrl)),
+      MaterialPageRoute(
+        builder: (context) => TabbedBrowser(initialUrl: initialUrl),
+      ),
     );
   }
 
@@ -96,7 +105,10 @@ class _TabbedBrowserState extends State<TabbedBrowser> {
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    constraints: const BoxConstraints(minWidth: 12, minHeight: 12),
+                    constraints: const BoxConstraints(
+                      minWidth: 12,
+                      minHeight: 12,
+                    ),
                     child: Text(
                       '${_tabs.length}',
                       style: const TextStyle(color: Colors.white, fontSize: 8),
@@ -148,7 +160,10 @@ class _TabbedBrowserState extends State<TabbedBrowser> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Tabs', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  const Text(
+                    'Tabs',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                   TextButton(
                     onPressed: () {
                       _addNewTab('https://google.com');
@@ -180,7 +195,9 @@ class _TabbedBrowserState extends State<TabbedBrowser> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: isActive ? Colors.blue : Colors.grey.shade300,
+                            color: isActive
+                                ? Colors.blue
+                                : Colors.grey.shade300,
                             width: isActive ? 3 : 1,
                           ),
                         ),
@@ -188,8 +205,13 @@ class _TabbedBrowserState extends State<TabbedBrowser> {
                         child: Column(
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              color: isActive ? Colors.blue.withValues(alpha: 0.1) : Colors.grey.shade100,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              color: isActive
+                                  ? Colors.blue.withValues(alpha: 0.1)
+                                  : Colors.grey.shade100,
                               child: Row(
                                 children: [
                                   Expanded(
@@ -213,7 +235,12 @@ class _TabbedBrowserState extends State<TabbedBrowser> {
                             Expanded(
                               child: Container(
                                 color: Colors.white,
-                                child: const Center(child: Icon(Icons.language, color: Colors.grey)),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.language,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                               ),
                             ),
                           ],

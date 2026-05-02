@@ -8,8 +8,10 @@ import 'package:share_plus/share_plus.dart';
 class EnhancedInAppBrowser {
   static final EnhancedInAppBrowser _instance =
       EnhancedInAppBrowser._internal();
+
   /// Provides access to the singleton instance of [EnhancedInAppBrowser].
   factory EnhancedInAppBrowser() => _instance;
+
   /// Private constructor for singleton
   EnhancedInAppBrowser._internal();
 
@@ -122,17 +124,13 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
     _addressController.text = widget.url;
 
     _findInteractionController = FindInteractionController(
-      onFindResultReceived: (
-        controller,
-        activeMatchOrdinal,
-        numberOfMatches,
-        isDoneCounting,
-      ) {
-        setState(() {
-          _findCurrentMatch = activeMatchOrdinal + 1;
-          _findTotalMatches = numberOfMatches;
-        });
-      },
+      onFindResultReceived:
+          (controller, activeMatchOrdinal, numberOfMatches, isDoneCounting) {
+            setState(() {
+              _findCurrentMatch = activeMatchOrdinal + 1;
+              _findTotalMatches = numberOfMatches;
+            });
+          },
     );
 
     // Initialize animation controllers
@@ -673,7 +671,8 @@ class _EnhancedBrowserScreenState extends State<_EnhancedBrowserScreen>
             ),
           IconButton(
             icon: const Icon(Icons.keyboard_arrow_up, size: 20),
-            onPressed: () => _findInteractionController.findNext(forward: false),
+            onPressed: () =>
+                _findInteractionController.findNext(forward: false),
             color: isDark ? Colors.white70 : Colors.black54,
           ),
           IconButton(

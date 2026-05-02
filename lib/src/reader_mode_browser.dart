@@ -44,9 +44,7 @@ class _ReaderModeBrowserState extends State<ReaderModeBrowser> {
           InAppWebView(
             initialUrlRequest: URLRequest(url: WebUri(widget.url)),
             onWebViewCreated: (controller) => _webViewController = controller,
-            initialSettings: InAppWebViewSettings(
-              javaScriptEnabled: true,
-            ),
+            initialSettings: InAppWebViewSettings(javaScriptEnabled: true),
           ),
           if (_isReaderMode)
             Container(
@@ -60,12 +58,17 @@ class _ReaderModeBrowserState extends State<ReaderModeBrowser> {
                         children: [
                           Text(
                             'Reader Mode',
-                            style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.displaySmall
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           const Divider(height: 32),
                           Text(
                             _extractedContent ?? 'Failed to extract content.',
-                            style: const TextStyle(fontSize: 18, height: 1.6, color: Colors.black87),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              height: 1.6,
+                              color: Colors.black87,
+                            ),
                           ),
                         ],
                       ),
@@ -83,14 +86,16 @@ class _ReaderModeBrowserState extends State<ReaderModeBrowser> {
 
     if (_isReaderMode && _extractedContent == null) {
       setState(() => _isLoadingContent = true);
-      
+
       // Simple JS injection to get main text content
-      final content = await _webViewController?.evaluateJavascript(source: """
+      final content = await _webViewController?.evaluateJavascript(
+        source: """
         (function() {
           var main = document.querySelector('main') || document.querySelector('article') || document.body;
           return main.innerText;
         })()
-      """);
+      """,
+      );
 
       setState(() {
         _extractedContent = content;

@@ -7,32 +7,44 @@ import 'package:share_plus/share_plus.dart';
 class BrowserOptions {
   /// Whether JavaScript is enabled.
   final bool javaScriptEnabled;
+
   /// Whether zooming is supported.
   final bool supportZoom;
+
   /// Whether to use the download start event.
   final bool useOnDownloadStart;
+
   /// Whether media playback requires a user gesture.
   final bool mediaPlaybackRequiresUserGesture;
+
   /// Whether inline media playback is allowed.
   final bool allowsInlineMediaPlayback;
+
   /// Whether back and forward navigation gestures are allowed.
   final bool allowsBackForwardNavigationGestures;
+
   /// The preferred content mode (mobile or desktop).
   final UserPreferredContentMode preferredContentMode;
-  
+
   // UI Options
   /// The color of the toolbar.
   final Color? toolbarColor;
+
   /// The color of the icons.
   final Color? iconColor;
+
   /// The color of the progress bar.
   final Color? progressBarColor;
+
   /// Whether to show the address bar.
   final bool showAddressBar;
+
   /// Whether to show the bottom toolbar.
   final bool showBottomToolbar;
+
   /// Whether to show the close button.
   final bool showCloseButton;
+
   /// A custom user agent string.
   final String? customUserAgent;
 
@@ -59,8 +71,10 @@ class BrowserOptions {
 class CustomizableBrowser extends StatefulWidget {
   /// The URL to load.
   final String url;
+
   /// The title of the browser (optional).
   final String? title;
+
   /// The options for the browser.
   final BrowserOptions options;
 
@@ -81,11 +95,8 @@ class CustomizableBrowser extends StatefulWidget {
   }) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => CustomizableBrowser(
-          url: url,
-          title: title,
-          options: options,
-        ),
+        builder: (context) =>
+            CustomizableBrowser(url: url, title: title, options: options),
       ),
     );
   }
@@ -112,7 +123,8 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
     final theme = Theme.of(context);
     final toolbarColor = _currentOptions.toolbarColor ?? theme.primaryColor;
     final iconColor = _currentOptions.iconColor ?? Colors.white;
-    final progressBarColor = _currentOptions.progressBarColor ?? theme.colorScheme.secondary;
+    final progressBarColor =
+        _currentOptions.progressBarColor ?? theme.colorScheme.secondary;
 
     return Scaffold(
       appBar: _currentOptions.showAddressBar
@@ -134,7 +146,10 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
                   ),
                   Text(
                     _currentUrl,
-                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.normal),
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                    ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
@@ -146,7 +161,8 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.share),
-                  onPressed: () => SharePlus.instance.share(ShareParams(text: _currentUrl)),
+                  onPressed: () =>
+                      SharePlus.instance.share(ShareParams(text: _currentUrl)),
                 ),
               ],
             )
@@ -167,9 +183,12 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
                 javaScriptEnabled: _currentOptions.javaScriptEnabled,
                 supportZoom: _currentOptions.supportZoom,
                 useOnDownloadStart: _currentOptions.useOnDownloadStart,
-                mediaPlaybackRequiresUserGesture: _currentOptions.mediaPlaybackRequiresUserGesture,
-                allowsInlineMediaPlayback: _currentOptions.allowsInlineMediaPlayback,
-                allowsBackForwardNavigationGestures: _currentOptions.allowsBackForwardNavigationGestures,
+                mediaPlaybackRequiresUserGesture:
+                    _currentOptions.mediaPlaybackRequiresUserGesture,
+                allowsInlineMediaPlayback:
+                    _currentOptions.allowsInlineMediaPlayback,
+                allowsBackForwardNavigationGestures:
+                    _currentOptions.allowsBackForwardNavigationGestures,
                 preferredContentMode: _currentOptions.preferredContentMode,
                 userAgent: _currentOptions.customUserAgent,
               ),
@@ -221,7 +240,10 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.open_in_browser),
-                    onPressed: () => launchUrl(Uri.parse(_currentUrl), mode: LaunchMode.externalApplication),
+                    onPressed: () => launchUrl(
+                      Uri.parse(_currentUrl),
+                      mode: LaunchMode.externalApplication,
+                    ),
                   ),
                 ],
               ),
@@ -239,7 +261,10 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
           children: [
             const Padding(
               padding: EdgeInsets.all(16.0),
-              child: Text('Browser Customization', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              child: Text(
+                'Browser Customization',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ),
             SwitchListTile(
               title: const Text('JavaScript'),
@@ -252,7 +277,10 @@ class _CustomizableBrowserState extends State<CustomizableBrowser> {
             ListTile(
               leading: const Icon(Icons.color_lens),
               title: const Text('Theme Color'),
-              trailing: const CircleAvatar(backgroundColor: Colors.blue, radius: 10),
+              trailing: const CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 10,
+              ),
               onTap: () {
                 // Implement color picker
               },

@@ -5,8 +5,10 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 class SimpleBrowser extends StatefulWidget {
   /// The URL to load.
   final String url;
+
   /// The title of the browser (optional).
   final String? title;
+
   /// Whether to show the progress bar.
   final bool showProgressBar;
 
@@ -19,7 +21,11 @@ class SimpleBrowser extends StatefulWidget {
   });
 
   /// Opens the [SimpleBrowser] in a new route.
-  static Future<void> open(BuildContext context, String url, {String? title}) async {
+  static Future<void> open(
+    BuildContext context,
+    String url, {
+    String? title,
+  }) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SimpleBrowser(url: url, title: title),
