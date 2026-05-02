@@ -103,7 +103,6 @@ If you find this package helpful, consider supporting its development!
 
 <br/>
 
-<iframe src="https://github.com/sponsors/KANAGARAJ-M/button" title="Sponsor KANAGARAJ-M" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
 
 ## 📝 License
 
