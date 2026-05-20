@@ -10,18 +10,18 @@ A comprehensive Flutter package providing multiple types of in-app webview exper
 <div align="center">
   <table>
     <tr>
-      <td align="center"><b>Enhanced Browser</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/enhanced_browser.jpeg" width="200"/></td>
-      <td align="center"><b>Tabbed Browser</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/tabbed_browser.jpeg" width="200"/></td>
-      <td align="center"><b>Glass Browser</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/glass_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Enhanced Browser</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/enhanced_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Tabbed Browser</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/tabbed_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Glass Browser</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/glass_browser.jpeg" width="200"/></td>
     </tr>
     <tr>
-      <td align="center"><b>Reader Mode</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/reader_browser.jpeg" width="200"/></td>
-      <td align="center"><b>Customizable</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/customizable_browser.jpeg" width="200"/></td>
-      <td align="center"><b>Simple Browser</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/simple_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Reader Mode</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/reader_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Customizable</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/customizable_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Simple Browser</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/simple_browser.jpeg" width="200"/></td>
     </tr>
     <tr>
-      <td align="center"><b>Bottom Sheet</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/bottom_sheet_browser.jpeg" width="200"/></td>
-      <td align="center"><b>Inline WebView</b><br/><img src="https://raw.githubusercontent.com/KANAGARAJ-M/browser_webview/main/screenshots/inline_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Bottom Sheet</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/bottom_sheet_browser.jpeg" width="200"/></td>
+      <td align="center"><b>Inline WebView</b><br/><img src="https://raw.githubusercontent.com/bluedev-in/browser_webview/main/screenshots/inline_browser.jpeg" width="200"/></td>
       <td></td>
     </tr>
   </table>
@@ -97,7 +97,7 @@ InlineWebView(url: 'https://flutter.dev', height: 400);
 
 If you find this package helpful, consider supporting its development!
 
-<a href="https://github.com/sponsors/KANAGARAJ-M">
+<a href="https://github.com/sponsors/bluedev-in">
   <img src="https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?style=for-the-badge&logo=github-sponsors" alt="Sponsor" />
 </a>
 
