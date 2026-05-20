@@ -1,6 +1,6 @@
 name: browser_webview
 description: "A comprehensive Flutter package providing multiple types of in-app webview experiences."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/bluedev-in/browser_webview
 repository: https://github.com/bluedev-in/browser_webview
 
